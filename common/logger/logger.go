@@ -22,6 +22,7 @@ const (
 	loggerError = "ERR"
 )
 
+// 单例模式
 var setupLogOnce sync.Once
 
 func SetupLogger() {
