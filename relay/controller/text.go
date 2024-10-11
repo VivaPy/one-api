@@ -22,11 +22,15 @@ func RelayTextHelper(c *gin.Context) *model.ErrorWithStatusCode {
 	ctx := c.Request.Context()
 	meta := meta.GetByContext(c)
 	// get & validate textRequest
+	// get request text: textRequest.Messages[]
 	textRequest, err := getAndValidateTextRequest(c, meta.Mode)
 	if err != nil {
 		logger.Errorf(ctx, "getAndValidateTextRequest failed: %s", err.Error())
 		return openai.ErrorWrapper(err, "invalid_text_request", http.StatusBadRequest)
 	}
+
+	c.Set("requestBody", textRequest.Messages)
+
 	meta.IsStream = textRequest.Stream
 
 	// map model name

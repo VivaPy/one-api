@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/songquanpeng/one-api/controller"
+	"github.com/songquanpeng/one-api/history"
 	"github.com/songquanpeng/one-api/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +21,7 @@ func SetRelayRouter(router *gin.Engine) {
 	relayV1Router.Use(middleware.RelayPanicRecover(), middleware.TokenAuth(), middleware.Distribute())
 	{
 		relayV1Router.POST("/completions", controller.Relay)
-		relayV1Router.POST("/chat/completions", controller.Relay)
+		relayV1Router.POST("/chat/completions", controller.Relay, history.SaveHistory)
 		relayV1Router.POST("/edits", controller.Relay)
 		relayV1Router.POST("/images/generations", controller.Relay)
 		relayV1Router.POST("/images/edits", controller.RelayNotImplemented)

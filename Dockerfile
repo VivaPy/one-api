@@ -16,11 +16,13 @@ WORKDIR /web/air
 RUN npm install
 RUN DISABLE_ESLINT_PLUGIN='true' REACT_APP_VERSION=$(cat VERSION) npm run build
 
-FROM golang AS builder2
+FROM golang:1.20 AS builder2
 
 ENV GO111MODULE=on \
     CGO_ENABLED=1 \
     GOOS=linux
+
+ENV SQL_DSN="oneapi:123456@tcp(127.0.0.1:3300)/one-api?charset=utf8mb4&parseTime=True&loc=Local"
 
 WORKDIR /build
 ADD go.mod go.sum ./

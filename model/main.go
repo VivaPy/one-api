@@ -59,6 +59,7 @@ func CreateRootAccountIfNeed() error {
 	return nil
 }
 
+// TODO 设置MYSQL环境变量
 func chooseDB(envName string) (*gorm.DB, error) {
 	if os.Getenv(envName) != "" {
 		dsn := os.Getenv(envName)

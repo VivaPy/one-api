@@ -109,6 +109,7 @@ func StreamHandler(c *gin.Context, resp *http.Response, relayMode int) (*model.E
 	return nil, responseText, usage
 }
 
+// Handler TODO textResponse
 func Handler(c *gin.Context, resp *http.Response, promptTokens int, modelName string) (*model.ErrorWithStatusCode, *model.Usage) {
 	var textResponse SlimTextResponse
 	responseBody, err := io.ReadAll(resp.Body)
@@ -119,10 +120,16 @@ func Handler(c *gin.Context, resp *http.Response, promptTokens int, modelName st
 	if err != nil {
 		return ErrorWrapper(err, "close_response_body_failed", http.StatusInternalServerError), nil
 	}
+	// TODO here textResponse.Choices[i].Message.Content
 	err = json.Unmarshal(responseBody, &textResponse)
 	if err != nil {
 		return ErrorWrapper(err, "unmarshal_response_body_failed", http.StatusInternalServerError), nil
 	}
+
+	c.Set("responseBody", textResponse.Choices)
+	c.Set("usage", textResponse.Usage)
+	//logger.Infof(c.Request.Context(), "response: %v\n", textResponse)
+
 	if textResponse.Error.Type != "" {
 		return &model.ErrorWithStatusCode{
 			Error:      textResponse.Error,
