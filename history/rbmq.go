@@ -18,7 +18,7 @@ type MQRecorder struct {
 
 func NewMQRecorder() *MQRecorder {
 
-	conn, err := amqp.Dial("amqp://oneapi:oneapi@datastructure?rbmq@8.134.223.251:5672/")
+	conn, err := amqp.Dial("amqp://golang:golang_rbmq1234@8.134.223.251:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 
 	ch, err := conn.Channel()
