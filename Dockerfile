@@ -25,7 +25,7 @@ ENV GO111MODULE=on \
     GOOS=linux \
     GOPROXY="https://goproxy.cn,direct"
 
-ENV SQL_DSN="oneapi:123456@tcp(127.0.0.1:3300)/one-api"
+#ENV SQL_DSN="oneapi:123456@tcp(127.0.0.1:3300)/one-api"
 
 WORKDIR /build
 ADD go.mod go.sum ./
