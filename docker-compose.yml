@@ -46,5 +46,5 @@ services:
 #      MYSQL_ROOT_PASSWORD: 'OneAPI@justsong' # 设置 root 用户的密码
       MYSQL_ROOT_PASSWORD: oneapi_scut
       MYSQL_USER: oneapi   # 创建专用用户
-      MYSQL_PASSWORD: 'oneapi_scut'    # 设置专用用户密码
+      MYSQL_PASSWORD: oneapi_scut    # 设置专用用户密码
       MYSQL_DATABASE: one-api   # 自动创建数据库
