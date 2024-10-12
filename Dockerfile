@@ -20,7 +20,8 @@ FROM golang:1.20 AS builder2
 
 ENV GO111MODULE=on \
     CGO_ENABLED=1 \
-    GOOS=linux
+    GOOS=linux \
+    GOPROXY=https://goproxy.cn,direct
 
 ENV SQL_DSN="oneapi:123456@tcp(127.0.0.1:3300)/one-api?charset=utf8mb4&parseTime=True&loc=Local"
 
