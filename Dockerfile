@@ -3,7 +3,8 @@ FROM node:16 as builder
 WORKDIR /web
 COPY ./VERSION .
 COPY ./web .
-RUN npm config set registry https://npm.aliyun.com
+
+ENV NPM_CONFIG_REGISTRY=https://registry.npmmirror.com/
 
 WORKDIR /web/default
 RUN npm install
