@@ -12,7 +12,7 @@ services:
       - ./data/oneapi:/data
       - ./logs:/app/logs
     environment:
-      - SQL_DSN="oneapi:oneapi_scut@tcp(127.0.0.1:3300)/one-api"      # 修改此行，或注释掉以使用 SQLite 作为数据库
+      - SQL_DSN="root:oneapi_scut@tcp(127.0.0.1:3300)/one-api"      # 修改此行，或注释掉以使用 SQLite 作为数据库
       - REDIS_CONN_STRING=redis://redis
       - SESSION_SECRET=random_string  # 修改为随机字符串
       - TZ=Asia/Shanghai
@@ -43,7 +43,8 @@ services:
       - '3300:3306'
     environment:
       TZ: Asia/Shanghai   # 设置时区
-      MYSQL_ROOT_PASSWORD: 'OneAPI@justsong' # 设置 root 用户的密码
+#      MYSQL_ROOT_PASSWORD: 'OneAPI@justsong' # 设置 root 用户的密码
+      MYSQL_ROOT_PASSWORD: oneapi_scut
       MYSQL_USER: oneapi   # 创建专用用户
       MYSQL_PASSWORD: 'oneapi_scut'    # 设置专用用户密码
       MYSQL_DATABASE: one-api   # 自动创建数据库
