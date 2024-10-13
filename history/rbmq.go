@@ -55,8 +55,8 @@ func (mqr *MQRecorder) send(msg []byte) error {
 		})
 }
 
-func (mqr *MQRecorder) Push(userID int, messages []model.Message, usage *model.Usage) error {
-	msgEntity := MessageToSend{userID, messages, *usage}
+func (mqr *MQRecorder) Push(tokenID int, messages []model.Message, usage *Usage) error {
+	msgEntity := MessageToSend{tokenID, messages, *usage}
 	msgBody, err := json.Marshal(&msgEntity)
 
 	failOnError(err, "fail to marshal message")

@@ -37,9 +37,12 @@ func SaveHistory(c *gin.Context) {
 		chatMessages = append(chatMessages, message.Message)
 	}
 
-	userID := c.GetInt(ctxkey.Id)
+	//userID := c.GetInt(ctxkey.Id)
+	tokenID := c.GetInt(ctxkey.TokenId)
 	usageVal, _ := c.Get("usage")
-	usage, _ := usageVal.(model.Usage)
-
-	recorder.Push(userID, chatMessages, &usage)
+	modelUsage, _ := usageVal.(model.Usage)
+	latencyVal, _ := c.Get("latency")
+	latency, _ := latencyVal.(float64)
+	usage := Usage{latency, modelUsage}
+	recorder.Push(tokenID, chatMessages, &usage)
 }
