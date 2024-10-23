@@ -12,7 +12,7 @@ services:
       - ./data/oneapi:/data
       - ./logs:/app/logs
     environment:
-      - SQL_DSN=root:oneapi_scut@tcp(mysql:3300)/one-api      # 修改此行，或注释掉以使用 SQLite 作为数据库
+      - SQL_DSN=root:oneapi_scut@tcp(mysql:3306)/one-api      # 修改此行，或注释掉以使用 SQLite 作为数据库
       - REDIS_CONN_STRING=redis://redis
       - SESSION_SECRET=random_string  # 修改为随机字符串
       - TZ=Asia/Shanghai
@@ -23,7 +23,7 @@ services:
 #      - redis
       - db
     healthcheck:
-      test: [ "CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' | awk -F: '{print $2}'" ]
+      test: [ "CMD-SHELL", "wget -q -O - http://one-api:3000/api/status | grep -o '\"success\":\\s*true' | awk -F: '{print $2}'" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -36,8 +36,8 @@ services:
     container_name: mysql
     volumes:
       - ./data/mysql:/var/lib/mysql  # 挂载目录，持久化存储
-    ports:
-      - '3300:3306'
+#    ports:
+#      - '3300:3306'
     environment:
       TZ: Asia/Shanghai   # 设置时区
 #      MYSQL_ROOT_PASSWORD: 'OneAPI@justsong' # 设置 root 用户的密码
