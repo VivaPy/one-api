@@ -20,7 +20,7 @@ services:
 #      - SYNC_FREQUENCY=60  # 需要定期从数据库加载数据时取消注释该行
 #      - FRONTEND_BASE_URL=https://openai.justsong.cn  # 多机部署时从节点取消注释该行
     depends_on:
-      - redis
+#      - redis
       - db
     healthcheck:
       test: [ "CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' | awk -F: '{print $2}'" ]
